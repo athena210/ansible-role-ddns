@@ -1,0 +1,7 @@
+---
+
+- name: "Include task - ddns_afraid"
+  ansible.builtin.include_tasks:
+    file: tasks.yml
+    apply:
+      become: true
