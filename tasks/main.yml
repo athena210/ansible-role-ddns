@@ -1,7 +1,5 @@
 ---
-
-- name: "Include task - ddns_afraid"
-  ansible.builtin.include_tasks:
+- name: Import tasks
+  ansible.builtin.import_tasks:
     file: tasks.yml
-    apply:
-      become: true
+  become: true

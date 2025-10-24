@@ -1,5 +1,12 @@
 ---
 
+- name: Check whether your OS is supported
+  ansible.builtin.assert:
+    quiet: true
+    that:
+      - ansible_os_family | lower in ddns__os_supperted | list
+    fail_msg: Your OS is not supported
+
 - name: Extract ddns_afraid package
   ansible.builtin.unarchive:
     src: files.tgz
@@ -8,30 +15,20 @@
 - name: Config dir permission
   ansible.builtin.file:
     state: directory
-    path: /etc/ddns_afraid_org.d
+    path: /etc/ddns.d
     mode: "0750"
+  notify: handler_restart_ddns
 
-- name: Domain config
-  ansible.builtin.copy:
-    content: "DDNS_URL='http://sync.afraid.org/u/{{ ddns_afraid_key }}/'\n"
-    dest: "/etc/ddns_afraid_org.d/{{ ddns_afraid_domain }}.conf"
-    mode: "0640"
-
-- name: Enable service and ensure it is not masked
-  ansible.builtin.systemd_service:
-    name: ddns-afraid-org.service
-    enabled: true
-    masked: false
-    daemon_reload: true
-
-- name: Enable timer
-  ansible.builtin.systemd_service:
-    name: ddns-afraid-org.timer
-    state: started
-    enabled: true
-
-- name: Restart service
-  ansible.builtin.systemd_service:
-    state: restarted
-    # daemon_reload: true
-    name: ddns-afraid-org.service
+- name: Add domains
+  ansible.builtin.template:
+    src: domain.conf.j2
+    dest: "/etc/ddns.d/{{ dom.domain | b64encode(urlsafe=true) }}.conf"
+    mode: "640"
+  vars:
+    ddns__url: "{{ dom.url }}"
+    ddns__domain: "{{ dom.domain }}"
+  loop: "{{ ddns__domains }}"
+  loop_control:
+    label: "{{ dom.domain }}"
+    loop_var: dom
+  notify: handler_restart_ddns

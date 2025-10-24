@@ -1,4 +1,4 @@
 ---
 
-ddns_afraid_key:
-ddns_afraid_domain:
+ddns__os_supperted:
+  - debian

@@ -1,3 +1,10 @@
 #SPDX-License-Identifier: MIT-0
 ---
 # defaults file for ddns_afraid
+
+ddns__domains:
+# ddns__domains:
+#   - domain: aa.gmail.cn
+#     url: https://example.com/key-aa
+#   - domain: tt.yahoo.in
+#     url: https://example.com/key-tt
