@@ -1,3 +1,5 @@
-#SPDX-License-Identifier: MIT-0
 ---
-# handlers file for ddns_afraid
+- name: Import handlers
+  ansible.builtin.import_tasks:
+    file: handlers.yml
+  become: true
