@@ -1,0 +1,9 @@
+[Unit]
+Description=Update DDNS (timer)
+
+[Timer]
+OnUnitActiveSec={{ ddns__update_interval_minutes }}m
+RandomizedDelaySec=1m
+
+[Install]
+WantedBy=timers.target
