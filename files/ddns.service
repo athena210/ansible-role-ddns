@@ -1,0 +1,10 @@
+[Unit]
+Description=Update DDNS (service)
+After=network.target network-online.target
+Wants=network-online.target
+
+[Service]
+ExecStart=/usr/libexec/ddns/update-ddns.sh
+
+[Install]
+WantedBy=multi-user.target

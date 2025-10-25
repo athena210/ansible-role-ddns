@@ -2,6 +2,9 @@
 ---
 # defaults file for ddns_afraid
 
+ddns__update_interval_minutes: 60
+ddns__clean_all: false
+
 ddns__domains:
 # ddns__domains:
 #   - domain: aa.gmail.cn
