@@ -1,2 +1,7 @@
 # {{ ddns__domain }}
-DDNS_URL={{ ddns__url }}
+{% if ddns__url4 -%}
+DDNS4_URL={{ ddns__url4 }}
+{% endif -%}
+{% if ddns__url6 -%}
+DDNS6_URL={{ ddns__url6 }}
+{% endif -%}
