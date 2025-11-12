@@ -1,13 +1,12 @@
 #SPDX-License-Identifier: MIT-0
 ---
-# defaults file for ddns_afraid
 
 ddns__update_interval_minutes: 60
-ddns__clean_all: false
+ddns__clean_all: true
 
 ddns__domains:
 # ddns__domains:
-#   - domain: aa.gmail.cn
-#     url: https://example.com/key-aa
-#   - domain: tt.yahoo.in
-#     url: https://example.com/key-tt
+#   - domain: only4.gmail.cn
+#     url4: https://ddns.host.com/key-a
+#   - domain: only6.gmail.cn
+#     url6: https://ddns.host.com/key-b

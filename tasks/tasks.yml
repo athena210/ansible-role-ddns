@@ -43,13 +43,15 @@
 - name: Add domains
   ansible.builtin.template:
     src: domain.conf.j2
-    dest: "/etc/ddns.d/{{ dom.domain | b64encode(urlsafe=true) }}.conf"
+    # dest: "/etc/ddns.d/{{ dom.domain | b64encode(urlsafe=true) }}.conf"
+    dest: "/etc/ddns.d/{{ dom.domain }}.conf"
     mode: "0640"
   vars:
-    ddns__url: "{{ dom.url }}"
     ddns__domain: "{{ dom.domain }}"
+    ddns__url4: "{{ dom.url4 | default('') }}"
+    ddns__url6: "{{ dom.url6 | default('') }}"
   loop: "{{ ddns__domains }}"
   loop_control:
-    label: "{{ dom.domain }}"
+    label: "{{ dom.domain }}.conf"
     loop_var: dom
   notify: handler_restart_ddns
