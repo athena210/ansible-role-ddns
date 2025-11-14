@@ -7,6 +7,12 @@
       - ansible_os_family | lower in ddns__os_supperted | list
     fail_msg: Your OS is not supported
 
+- name: Install curl
+  ansible.builtin.apt:
+    name: curl
+    state: present
+    update_cache: "{{ ddns__force_update_repo }}"
+
 - name: Clean first
   ansible.builtin.file:
     path: /etc/ddns.d/

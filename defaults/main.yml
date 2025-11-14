@@ -3,6 +3,7 @@
 
 ddns__update_interval_minutes: 60
 ddns__clean_all: true
+ddns__force_update_repo: true
 
 ddns__domains:
 # ddns__domains:
